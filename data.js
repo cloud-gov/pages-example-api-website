@@ -1,8 +1,7 @@
 fetch("https:cfpyapi.app.cloud.gov/get_table").then((data)=>{
     return data.json();
 }).then((objectData)=>{
-    console.log(objectData[0].title);
-    let tableData=""; // All data inside the table
+    let tableData="";
     objectData.map((values)=>{
         tableData+=` <tr>
         <td>${values['Acquiring Institution']}</td>
