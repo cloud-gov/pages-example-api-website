@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https:cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.7.1/css/uswds.min.css" integrity="sha512-bcuUpRrTZ9QzMZIs+vutspdGnAmWU0pV2eka+7ifli70qy3AavSj0pQMBMtlXhnGpESyODLagSqxbuYm6I3DPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />  </head>
   <body>
-    <h1 class="text-center">Failed Banklist Table</h1>
+    <h1 class="text-center">FDIC Failed Banklist Table</h1>
     <div class="container">
-    <table class="table table-hover table-bordered">
+    <table class="table usa-table table-hover table-bordered">
         <thead>
           <tr>
             <th scope="col" style="border-top: 1px solid black;">Acquiring Institution</th>
@@ -26,10 +26,8 @@
         </tbody>
       </table>
       </div>
-      <script src="data.js"></script>
       <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
       <script>
-        
         $(document).ready(function() {
           $('.table').DataTable({
               ajax: {
