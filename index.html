@@ -31,7 +31,7 @@
           <em class="usa-logo__text">
             <a href="/" title="cloud.gov + Pages API Demo">
               <span class="font-ui-md text-normal text-primary-darker">
-                <img alt="cloud.gov" class="height-4 text-middle" crossorigin="anonymous" src="/cloud-gov-logo.svg">
+                <img alt="cloud.gov" class="height-4 text-middle" crossorigin="anonymous" src="cloud-gov-logo.svg">
                 Pages + API Demo
               </span>
             </a>
@@ -67,9 +67,7 @@
     async function getDataFromCloudAPI() {
       let dataJson = null;
       try {
-        const response = await fetch("https://cfpyapi.app.cloud.gov/get_table", {
-          mode: "no-cors"
-        });
+        const response = await fetch("https://cfpyapi.app.cloud.gov/get_table");
         dataJson = await response.json();
       } catch (error) {
         console.log(error)
