@@ -1,51 +1,171 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.7.1/css/uswds.min.css" integrity="sha512-bcuUpRrTZ9QzMZIs+vutspdGnAmWU0pV2eka+7ifli70qy3AavSj0pQMBMtlXhnGpESyODLagSqxbuYm6I3DPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />  </head>
-  <body>
-    <h1 class="text-center">FDIC Failed Banklist Table</h1>
-    <div class="container">
-    <table class="table usa-table table-hover table-bordered">
-        <thead>
-          <tr>
-            <th scope="col" style="border-top: 1px solid black;">Acquiring Institution</th>
-            <th scope="col" style="border-top: 1px solid black;">Bank Name</th>
-            <th scope="col" style="border-top: 1px solid black;">Cert</th>
-            <th scope="col" style="border-top: 1px solid black;">City</th>
-            <th scope="col" style="border-top: 1px solid black;">Closing Date</th>
-            <th scope="col" style="border-top: 1px solid black;">Fund</th>
-            <th scope="col" style="border-top: 1px solid black;">State</th>
-          </tr>
-        </thead>
-        <tbody id="table_body">
-        </tbody>
-      </table>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" type="image/ico" />
+  <!-- Title and meta description
+    ================================================== -->
+  <title>cloud.gov Pages + API example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.7.1/js/uswds-init.min.js" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.7.1/css/uswds.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link href="/styles.css" type="text/css" rel="stylesheet" />
+
+</head>
+
+<body>
+  <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+  <header class="usa-header usa-header--basic">
+    <div class="usa-nav-container">
+      <div class="usa-navbar">
+        <div class="usa-logo" id="logo">
+          <em class="usa-logo__text">
+            <a href="/" title="cloud.gov + Pages API Demo">
+              <span class="font-ui-md text-normal text-primary-darker">
+                <img alt="cloud.gov" class="height-4 text-middle" crossorigin="anonymous" src="/cloud-gov-logo.svg">
+                Pages + API Demo
+              </span>
+            </a>
+          </em>
+        </div>
       </div>
-      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
-      <script>
-        $(document).ready(function() {
-          $('.table').DataTable({
-              ajax: {
-                  url: 'https://cfpyapi.app.cloud.gov/get_table',
-                  dataSrc: ''
-              },
-              columns: [
-            { data: 'Acquiring Institution' },
-            { data: 'Bank Name' },
-            { data: 'Cert' },
-            { data: 'City' },
-            { data: 'Closing Date' },
-            { data: 'Fund' },
-            { data: 'State' }
-        ],
-        pageLength: 10
-            });
+    </div>
+  </header>
+  <main id="main-content">
+    <div class="grid-container">
+      <div class="grid-row">
+        <div class="grid-col">
+          <h1 class="text-center">FDIC Failed Banklist Table</h1>
+        </div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-col">
+          <table class="usa-table  usa-table--striped" id="data-table">
+            <caption style=" caption-side: bottom;">
+              <h2 class=" font-sans-sm">Source: Failed Bank List, FDIC.gov</h2>
+              <p class="text-normal">Last Updated: November 3, 2023</br>
+                The FDIC is often appointed as receiver for failed banks. This list includes banks which have failed
+                since
+                October 1, 2000. This dataset is intended for public access and use. Source data at
+                <a href="https://catalog.data.gov/dataset/fdic-failed-bank-list">catalog.data.gov</a>
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Acquiring Institution</th>
+                <th scope="col">Bank Name</th>
+                <th scope="col">Cert</th>
+                <th scope="col">City</th>
+                <th scope="col">Closing Date</th>
+                <th scope="col">Fund</th>
+                <th scope="col">State</th>
+              </tr>
+            </thead>
+
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+
+    async function getData() {
+      let dataJson = null;
+      try {
+        const response = await fetch("https://cfpyapi.app.cloud.gov/get_table", {
+          mode: "no-cors"
+        });
+        dataJson = await response.json();
+        console.log(dataJson);
+      }
+      finally {
+        // placeholder if request fails
+        if (dataJson == null) return [
+          [
+            "row 1, cell 1",
+            "row 1, cell 2",
+            "row 1, cell 3",
+            "row 1, cell 4",
+            "row 1, cell 5",
+            "row 1, cell 6",
+            "row 1, cell 7"
+          ],
+          [
+            "row 2, cell 1",
+            "row 2, cell 2",
+            "row 2, cell 3",
+            "row 2, cell 4",
+            "row 2, cell 5",
+            "row 2, cell 6",
+            "row 2, cell 7"
+          ]
+        ]
+      }
+    }
+
+    function createRows(rowData) {
+      const tableBody = document.createElement("tbody");
+      rowData.forEach((row, rowIndex) => {
+        let newRow = tableBody.insertRow(rowIndex);
+        row.forEach((cell, cellIndex) => {
+          let newCell = newRow.insertCell(cellIndex)
+          let cellText = document.createTextNode(cell)
+          newCell.appendChild(cellText)
+        })
+
+      });
+      return tableBody
+    }
+
+
+    function createTable(data) {
+      document.getElementById("data-table").appendChild(createRows(data))
+    }
+
+    window.addEventListener("load", (event) => {
+      getData().then((data) => createTable(data))
+
+
+    });
+
+    /*
+      $(document).ready(function() {
+        $('.table').DataTable({
+            ajax: {
+                url: 'https://cfpyapi.app.cloud.gov/get_table',
+                dataSrc: ''
+            },
+            columns: [
+          { data: 'Acquiring Institution' },
+          { data: 'Bank Name' },
+          { data: 'Cert' },
+          { data: 'City' },
+          { data: 'Closing Date' },
+          { data: 'Fund' },
+          { data: 'State' }
+      ],
+      pageLength: 10
           });
-        </script>
-  </body>
+        }); */
+  </script>
+  <footer class="usa-footer">
+    <div class="grid-container usa-footer__return-to-top">
+      <a href="#">Return to top</a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.7.1/js/uswds.min.js" crossorigin="anonymous"
+    referrerpolicy="no-referrer" defer></script>
+
+</body>
+
 </html>
