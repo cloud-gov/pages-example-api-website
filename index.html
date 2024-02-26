@@ -73,99 +73,7 @@
         console.log(error)
       }
       finally {
-        // placeholder if request fails
-        if (dataJson == null) return [
-          {
-            "Acquiring Institution": "Iowa Trust & Savings Bank",
-            "Bank Name": "Citizens Bank",
-            "Cert": 8758,
-            "City": "Sac City",
-            "Closing Date": "3-Nov-23",
-            "Fund": 10545,
-            "State": "IA",
-            "id": 1
-          },
-          {
-            "Acquiring Institution": "Dream First Bank, N.A.",
-            "Bank Name": "Heartland Tri-State Bank",
-            "Cert": 25851,
-            "City": "Elkhart",
-            "Closing Date": "28-Jul-23",
-            "Fund": 10544,
-            "State": "KS",
-            "id": 2
-          },
-          {
-            "Acquiring Institution": "JPMorgan Chase Bank, N.A.",
-            "Bank Name": "First Republic Bank",
-            "Cert": 59017,
-            "City": "San Francisco",
-            "Closing Date": "1-May-23",
-            "Fund": 10543,
-            "State": "CA",
-            "id": 3
-          },
-          {
-            "Acquiring Institution": "Flagstar Bank, N.A.",
-            "Bank Name": "Signature Bank",
-            "Cert": 57053,
-            "City": "New York",
-            "Closing Date": "12-Mar-23",
-            "Fund": 10540,
-            "State": "NY",
-            "id": 4
-          },
-          {
-            "Acquiring Institution": "First\u2013Citizens Bank & Trust Company",
-            "Bank Name": "Silicon Valley Bank",
-            "Cert": 24735,
-            "City": "Santa Clara",
-            "Closing Date": "10-Mar-23",
-            "Fund": 10539,
-            "State": "CA",
-            "id": 5
-          },
-          {
-            "Acquiring Institution": "Equity Bank",
-            "Bank Name": "Almena State Bank",
-            "Cert": 15426,
-            "City": "Almena",
-            "Closing Date": "23-Oct-20",
-            "Fund": 10538,
-            "State": "KS",
-            "id": 6
-          },
-          {
-            "Acquiring Institution": "United Fidelity Bank, fsb",
-            "Bank Name": "First City Bank of Florida",
-            "Cert": 16748,
-            "City": "Fort Walton Beach",
-            "Closing Date": "16-Oct-20",
-            "Fund": 10537,
-            "State": "FL",
-            "id": 7
-          },
-          {
-            "Acquiring Institution": "MVB Bank, Inc.",
-            "Bank Name": "The First State Bank",
-            "Cert": 14361,
-            "City": "Barboursville",
-            "Closing Date": "3-Apr-20",
-            "Fund": 10536,
-            "State": "WV",
-            "id": 8
-          },
-          {
-            "Acquiring Institution": "Farmers and Merchants Bank",
-            "Bank Name": "Ericson State Bank",
-            "Cert": 18265,
-            "City": "Ericson",
-            "Closing Date": "14-Feb-20",
-            "Fund": 10535,
-            "State": "NE",
-            "id": 9
-          }
-        ]
+        if (dataJson == null) return null;
         return dataJson;
       }
     }
@@ -180,7 +88,7 @@
           newHeader.innerHTML = key;
           newRow.appendChild(newHeader);
         }
-      })
+      });
       return tableHead
     }
 
@@ -193,7 +101,7 @@
             let newCell = newRow.insertCell(cellIndex)
             newCell.innerHTML = value;
           }
-        })
+        });
       });
       return tableBody
     }
@@ -204,10 +112,12 @@
     }
 
     window.addEventListener("load", (event) => {
-      getDataFromCloudAPI().then((data) => createTable(data))
-
-
-    });
+      getDataFromCloudAPI().then((data) => {
+      if (data !== null) {
+      createTable(data);
+    }
+});
+});
 
   </script>
   <footer class="usa-footer">
