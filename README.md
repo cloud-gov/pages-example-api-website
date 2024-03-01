@@ -8,11 +8,11 @@ This website is a demonstration of how a static site can fetch data from an API 
 
 ## Features
 
-- Dynamic Table: Using vanilla JavaScript, the JSON response data is used to build the table header and rows then append them to an empty HTML table element within the static page. Pages servers everything client site so upon any changes to the backend database, during page load those changes will be reflect on the page.
+- **Dynamic Table**: Using vanilla JavaScript, the JSON response data is used to build the table header and rows then append them to an empty HTML table element within the static page. Pages serves everything client site so upon any changes to the backend database, during page load those changes will be reflect on the page.
 
-- Responsive Design: The HTML table uses a grid layout ensuring that the table is easiliy viewable on device of different sizes
+- **Responsive Design**: The HTML table uses a grid layout ensuring that the table is easiliy viewable on device of different sizes.
 
-- U.S. Web Design Sysatem (USWDS) Compliant: Utilizes USWDS design principles, styling and accessiblity standards. The site is also mobile device friendly.
+- **U.S. Web Design System (USWDS) Compliant**: Utilizes USWDS design principles, styling and accessiblity standards. The site is also mobile device friendly.
 
 ## Development
 
