@@ -67,7 +67,7 @@
     async function getDataFromCloudAPI() {
       let dataJson = null;
       try {
-        const response = await fetch("https://cfpyapi.app.cloud.gov/get_table");
+        const response = await fetch("https://cfpyapi2.app.cloud.gov/get_table");
         dataJson = await response.json();
       } catch (error) {
         console.log(error)
